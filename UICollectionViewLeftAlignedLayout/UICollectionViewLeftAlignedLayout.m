@@ -57,7 +57,11 @@
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes* currentItemAttributes = [[super layoutAttributesForItemAtIndexPath:indexPath] copy];
+    UICollectionViewLayoutAttributes* superAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
+    if (superAttributes == nil) {
+        return superAttributes;
+    }
+    UICollectionViewLayoutAttributes* currentItemAttributes = [superAttributes copy];
     UIEdgeInsets sectionInset = [self evaluatedSectionInsetForItemAtIndex:indexPath.section];
 
     BOOL isFirstItemInSection = indexPath.item == 0;
